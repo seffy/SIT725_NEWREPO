@@ -18,12 +18,6 @@ socket.on('message-deleted', () => {
 });
 
 
-// Listen for random number updates
-socket.on('number', (msg) => {
-  console.log('Random number: ' + msg); // Log the random number to the console
-});
-
-
 
 
 

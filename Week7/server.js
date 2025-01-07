@@ -68,8 +68,6 @@ app.put('/messages/:id', async (req, res) => {
 
 
 
-
-
 app.delete('/messages/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -83,9 +81,25 @@ app.delete('/messages/:id', async (req, res) => {
 });
 
 
-
-
 module.exports = { app, server };
+
+
+io.on('connection',(socket)=>{
+  console.log('user connected');
+  socket.on('disconnect', () => {
+      console.log('user disconnected');
+  });
+
+  setInterval(()=>{
+      x=parseInt(Math.random()*10);
+      socket.emit('number', x);
+      console.log('Emmiting Number '+x);
+  }, 1000)
+});
+
+
+
+
 
 const PORT = process.env.NODE_ENV === 'test' ? 3002 : 8080;
 server.listen(PORT, () => {
