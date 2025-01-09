@@ -137,7 +137,7 @@ button:hover {
   }
 /* Container for the chat */
 .chat-container {
-    max-width: 500px;
+    max-width: 650px;
     margin: 5px auto;
     display: flex;
     flex-direction: column;
@@ -247,4 +247,7 @@ letter-spacing: -0.009em;
     margin: 0 auto;
     text-align: center;;
 }
-  
+
+.spacer {
+    height: 160px;
+}

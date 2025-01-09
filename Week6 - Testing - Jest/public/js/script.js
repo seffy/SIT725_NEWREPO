@@ -5,16 +5,27 @@ const messageInput = document.getElementById('messageInput');
 // Real-time updates
 socket.on('message-added', (message) => {
   renderMessage(message); // Prepend the new message
+  fetchMessages();
+  window.scrollTo(0, document.body.scrollHeight);
 });
 
+/*
+socket.on('messages-updated', (messages) => {
+  updateMessagesUI(messages); // Your UI refresh logic
+  fetchMessages(); // Refresh all messages
+});
+*/
+
 socket.on('messages-updated', (sortedMessages) => {
+  fetchMessages();
+
   messagesDiv.innerHTML = ''; // Clear the current list
 
-  sortedMessages.forEach(renderMessage); // Render each message in the correct order
 });
 
 socket.on('message-deleted', () => {
   fetchMessages(); // Refresh all messages
+  window.scrollTo(0, document.body.scrollHeight);
 });
 
 $(document).ready(function(){

@@ -45,6 +45,31 @@ app.post('/messages', async (req, res) => {
   }
 });
 
+/*
+app.put('/messages/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { text } = req.body;
+
+    // Update only the `text` field
+    await Message.findByIdAndUpdate(id, { text }, { new: true });
+
+    // Fetch all messages and sort by `createdAt`
+    const messages = await Message.find().sort({ createdAt: -1 });
+
+    // Notify clients with the updated sorted list
+    io.emit('messages-updated', messages);
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Error updating message:', error);
+    res.status(500).json({ error: 'An error occurred while updating the message.' });
+  }
+});
+*/
+
+
+
 app.put('/messages/:id', async (req, res) => {
   try {
     const { id } = req.params;

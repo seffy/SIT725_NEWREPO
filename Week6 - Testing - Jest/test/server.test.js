@@ -86,6 +86,34 @@ describe('DELETE /messages/:id', () => {
     });
 });
 
+describe('PUT /messages/:id', () => {
+    it('should update the message text', async () => {
+      // Create a new message to update
+      const message = await Message.create({ text: 'Initial Message' });
+  
+      const response = await request(app)
+        .put(`/messages/${message._id}`)
+        .send({ text: 'Updated Message' });
+  
+      expect(response.status).toBe(200);
+      expect(response.body.success).toBe(true);
+  
+      // Verify the update in the database
+      const updatedMessage = await Message.findById(message._id);
+      expect(updatedMessage.text).toBe('Updated Message');
+    });
+  
+    it('should return an error for invalid message ID', async () => {
+      const response = await request(app)
+        .put('/messages/invalidID')
+        .send({ text: 'Should Fail' });
+  
+      expect(response.status).toBe(500);
+      expect(response.body.error).toBe('An error occurred while updating the message.');
+    });
+
+  });
+  
 
 describe('Server Tests', () => {
     test('Valid Message Text', async () => {
